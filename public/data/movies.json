@@ -1,0 +1,31 @@
+[
+    {"id":"1",
+    "title": "The Amazing Spiderman",
+    "genre":"action",
+    "rating":5,
+    "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
+    "trivia":"Spiderman is not an actual pearson",
+     "description": "Lorem ipsum bullshit, Lorem ipsum bullshit, Lorem ipsum bullshit, "
+ 	},{"id":"1",
+    "title": "titanic",
+    "genre":"action",
+    "rating":5,
+    "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
+    "trivia":"Spiderman is not an actual pearson",
+     "description": "Lorem ipsum bullshit, Lorem ipsum bullshit, Lorem ipsum bullshit, "
+ 	},{"id":"1",
+    "title": "Krzyzacy",
+    "genre":"action",
+    "rating":5,
+    "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
+    "trivia":"Spiderman is not an actual pearson",
+     "description": "Lorem ipsum bullshit, Lorem ipsum bullshit, Lorem ipsum bullshit, "
+ 	},{"id":"1",
+    "title": "Poranek kojota",
+    "genre":"action",
+    "rating":5,
+    "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
+    "trivia":"Spiderman is not an actual pearson",
+     "description": "Lorem ipsum bullshit, Lorem ipsum bullshit, Lorem ipsum bullshit, "
+ 	}
+  ]

@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>IMDB One Page Concept</title>
+	<link rel="icon" type="image/ico" href="assets/images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/ze-style.css">
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="js/angular-animate.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+</head>
+<body ng-app="moviesApp">
+	<div id="superwrapper">
+
+		<div id="header">
+			<header id="top" class="wrapper">
+				<div id="branding">
+					<div id="logo pull-left">
+						<a href="#">
+							<img src="assets/images/logo.png">
+						</a>
+						<div class="input-group pull-right" id="search" >
+					      <input type="text" class="form-control" ng-model="query">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" type="button">Go!</button>
+					      </span>
+					    </div>
+
+					</div>
+
+				</div>
+			</header>
+		</div>
+
+		
+			<div ng-view></div>
+			
+
+</div>
+</body>
+</html>

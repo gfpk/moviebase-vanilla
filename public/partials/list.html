@@ -1,0 +1,31 @@
+<div class="wrapper" id="main">
+<div id="list" >
+				
+		        <section  ng-repeat="movie in filteredMovies = (movies | filter:{title:query})" >
+					<article class="item panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title"> <a href="#/{{movie.id}}">{{movie.title}}</a></h3>
+						</div>
+						<div class="panel-body">
+							<img ng-src="assets/uploads/{{movie.title}}/thumb/thumb.jpg"><br>
+							{{movie.description}}
+						</div>
+						<footer class="panel-footer">
+						</footer>
+					</article>
+					</section>
+
+					<section class="item panel panel-warning" ng-show="!filteredMovies.length" >					
+						<div class="panel-heading">
+							<h3 class="panel-title">No resulsts</h3>
+						</div>
+						<div class="panel-body">
+							
+							please enter new search phrase
+						</div>
+						
+					</section>		
+				
+				
+			</div>
+		</div>

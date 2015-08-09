@@ -19,18 +19,19 @@
 							<img src="assets/images/logo.png">
 						</a>
 						<div class="input-group pull-right" id="search" >
-					      <input type="text" class="form-control" ng-model="query">
+					      <input type="text" class="form-control" onkeyup = "searchPhrase = this.value; renderList()">
 					      <span class="input-group-btn">
 					        <button class="btn btn-default" type="button">Go!</button>
 					      </span>
 					    </div>
-
 					</div>
-
 				</div>
 			</header>
-		</div>			
-<div id="contentarea"></div>		
-</div>
+		</div>	
+
+		<div id="contentarea">
+		</div>	
+			
+	</div>
 </body>
 </html>

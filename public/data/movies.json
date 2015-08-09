@@ -1,6 +1,6 @@
 [
-    {"id":"1",
-    "title": "The Amazing Spidermannn",
+    {"id":"0",
+    "title": "The Amazing Spiderman",
     "genre":"action",
     "rating":5,
     "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
@@ -13,14 +13,14 @@
     "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
     "trivia":"Spiderman is not an actual pearson",
      "description": "Lorem ipsum bullshit, Lorem ipsum bullshit, Lorem ipsum bullshit, "
- 	},{"id":"1",
+ 	},{"id":"2",
     "title": "Krzyzacy",
     "genre":"action",
     "rating":5,
     "stats":{"audience":87872,"profits":241234,"sadbf":1234123},
     "trivia":"Spiderman is not an actual pearson",
      "description": "Lorem ipsum bullshit, Lorem ipsum bullshit, Lorem ipsum bullshit, "
- 	},{"id":"1",
+ 	},{"id":"3",
     "title": "Poranek kojota",
     "genre":"action",
     "rating":5,

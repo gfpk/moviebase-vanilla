@@ -1,21 +1,20 @@
 <div class="wrapper" id="main">
-<div id="list" >
-	<section  ng-repeat="movie in filteredMovies = (movies | filter:{title:query})" >
+	<div id="list" >		
+	<section>
 		<article class="item panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"> <a href="#/{{movie.id}}">{{singleMovie.title}}</a></h3>
+				<h3 class="panel-title"> <a href="#/{{movie.id}}">{{movie.title}}</a></h3>
 			</div>
 			<div class="panel-body">
-				<img ng-src="assets/uploads/{{movie.title}}/thumb/thumb.jpg"><br>
+				<img src="assets/uploads/{{movie.title}}/thumb/thumb.jpg"><br>
 				{{movie.description}}
 			</div>
-			<footer class="panel-footer">
-			</footer>
+		<footer class="panel-footer">
+		</footer>
 		</article>
-	</section>
 
-					
-				
-		  
-		  <a href="/" class="btn btn-block btn-lg btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> back</a>
+		<a href="/" class="btn btn-block btn-lg btn-primary" onclick="renderList()"><span class="glyphicon glyphicon-arrow-left"></span> back</a>
+		
+	</section>
+	</div>
 </div>

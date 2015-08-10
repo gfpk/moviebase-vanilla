@@ -60,6 +60,7 @@ var load = {
 
 };
 
+
 storage = {};
 
 renderRating = function(){
@@ -105,6 +106,11 @@ genreFilter = '';
 
 document.addEventListener("DOMContentLoaded", function(event) { 
 var contentdiv = document.getElementById('contentarea');
+renderBadRoute=function(){
+	load.loadHTML('partials/404.html', function(data){	
+		contentdiv.innerHTML = data;
+	});
+};
 renderList = function()
 	{
 		load.loadHTML('partials/list.html', function(data){	
@@ -136,8 +142,7 @@ renderList = function()
 					renderRating();
 					});
 				}else{
-					load.loadHTML('partials/noresults.html', function(data){
-						
+					load.loadHTML('partials/noresults.html', function(data){	
 					var listEl = document.getElementById('list');
 					listEl.innerHTML = data;
 					});
@@ -145,19 +150,22 @@ renderList = function()
 			});			
 		});
 	}
-renderList();	
+//renderList();	
 
 renderDetailed = function(item){
 	load.loadHTML('partials/detailed.html', function(data){	
 			var htmlData = data;
 			load.loadJSON('data/movies.json', function(data){
-				var jsonData = data;
-				storage.htmlSingleView = htmlData;
-				storage.jsonData = jsonData;			
-				var	htmlResult = load.populateData(htmlData, storage.jsonData[item], "detail");			
-				contentdiv.innerHTML = htmlResult;
-				renderRating();
-				galleryLightBox();			
+				if(data[item]){
+					var jsonData = data;
+					storage.jsonData = jsonData;			
+					var	htmlResult = load.populateData(htmlData, storage.jsonData[item], "detail");			
+					contentdiv.innerHTML = htmlResult;
+					renderRating();
+					galleryLightBox();
+				}else{
+					renderBadRoute();
+				}			
 			});		
 		});
 }
@@ -181,7 +189,24 @@ searchMoviesByGenre = function(genre){
 	};
 	return results
 };
+var router = function(){
+	var route = window.location.href.replace(window.location.origin+"/#/",'');
+	console.log(route);
+	if(isNaN(route) == false){
+		renderDetailed(route);
+	}else if(isNaN(route) == true) {
+		if(window.location.href.replace(window.location.origin+"/#/",'')==window.location.origin+"/"){
+			renderList();
+		}else{
+			genreFilter = route;
+			renderList();
+		}
+		
+	}else{
+		renderBadRoute();
+	};
+};
 
-
+router();
 });
 

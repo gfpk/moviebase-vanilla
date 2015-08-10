@@ -15,7 +15,6 @@ var load = {
 	    xhr.open("GET", url, true);
 	    xhr.send();
 	},
-	
 	loadHTML:function(url, success, error)
 	{
 	    var xhr = new XMLHttpRequest();
@@ -34,15 +33,6 @@ var load = {
 	    xhr.open("GET", url, true);
 	    xhr.send();
 	},
-
-	errorlog:function(xhr){
-		console.error(xhr);
-	},
-
-	successlog:function(data){
-		console.log(data );
-	},
-
 	populateData:function(htmlString, dataObj, context){
 		var toBeReplaced = ['id', 'title', 'description', 'genre', 'rating', 'budget', 'audience', 'profits', 'trivia'];
 		var newhtmlString = htmlString;
@@ -57,12 +47,8 @@ var load = {
 		};			
 		return newhtmlString
 	},
-
 };
-
-
 storage = {};
-
 renderRating = function(){
 	var ratingElements = document.getElementsByClassName('rating');
 	for (var i = 0; i < ratingElements.length; i++) {
@@ -78,7 +64,6 @@ renderRating = function(){
 		ratingElements[i].innerHTML = ratingHtml;		
 	};
 };
-
 hideGallery = function(){
 	var e = document.getElementById("canvas");
 	var eInner = document.getElementById("canvasinner");
@@ -90,7 +75,6 @@ revealGallery = function(index){
 	var e = document.getElementById("canvas");
 	e.className = "active"; 
 };
-
 galleryLightBox =function(index){
 	var canvas = document.getElementById("canvas");
 
@@ -100,10 +84,8 @@ galleryLightBox =function(index){
 	console.log(galleryItem);
 	e.innerHTML = galleryHtml;
 }
-
 searchPhrase = '';
 genreFilter = '';
-
 document.addEventListener("DOMContentLoaded", function(event) { 
 var contentdiv = document.getElementById('contentarea');
 renderBadRoute=function(){
@@ -111,65 +93,59 @@ renderBadRoute=function(){
 		contentdiv.innerHTML = data;
 	});
 };
-renderList = function()
-	{
-		load.loadHTML('partials/list.html', function(data){	
-			var htmlData = data;
-			contentdiv.innerHTML = data;
-			if(genreFilter != ""){
+renderList = function(){
+	load.loadHTML('partials/list.html', function(data){	
+		var htmlData = data;
+		contentdiv.innerHTML = data;
+		if(genreFilter != ""){
+			var filtersHtml = "<p>filter: <span class='badge badge-important'>"+ genreFilter +" <a href='/'><i class='glyphicon glyphicon-remove-circle'></i></a></span></p>";
+			var filterWrap = document.getElementById('filterwrap');
+			filterWrap.innerHTML =filtersHtml;
+		}
+		load.loadJSON('data/movies.json', function(data){
+			var jsonData = data;
+			storage.htmlData = htmlData;
+			storage.jsonData = jsonData;
+			storage.jsonData = (searchPhrase != "")? searchMovies(searchPhrase) : jsonData;
+			storage.jsonData = (genreFilter != "")? searchMoviesByGenre(genreFilter) : storage.jsonData;
+			if(storage.jsonData[0]){
+				load.loadHTML('partials/listitem.html', function(data){
+					var htmlResult = ""; 
+					var htmlData = data;
+					for (var i = 0; i < storage.jsonData.length; i++) {
+						htmlResult += load.populateData(htmlData, storage.jsonData[i], "list");
+					};	
+				var listEl = document.getElementById('list');
 				
-				var filtersHtml = "<p>filter: <span class='badge badge-important'>"+ genreFilter +" <a href='/'><i class='glyphicon glyphicon-remove-circle'></i></a></span></p>";
-				var filterWrap = document.getElementById('filterwrap');
-				filterWrap.innerHTML =filtersHtml;
-
-			}
-			load.loadJSON('data/movies.json', function(data){
-				var jsonData = data;
-				storage.htmlData = htmlData;
-				storage.jsonData = jsonData;
-				storage.jsonData = (searchPhrase != "")? searchMovies(searchPhrase) : jsonData;
-				storage.jsonData = (genreFilter != "")? searchMoviesByGenre(genreFilter) : storage.jsonData;
-				if(storage.jsonData[0]){
-					load.loadHTML('partials/listitem.html', function(data){
-						var htmlResult = ""; 
-						var htmlData = data;
-						for (var i = 0; i < storage.jsonData.length; i++) {
-							htmlResult += load.populateData(htmlData, storage.jsonData[i], "list");
-						};	
-					var listEl = document.getElementById('list');
-					
-					listEl.innerHTML = htmlResult;
-					renderRating();
-					});
-				}else{
-					load.loadHTML('partials/noresults.html', function(data){	
-					var listEl = document.getElementById('list');
-					listEl.innerHTML = data;
-					});
-				}			
-			});			
-		});
-	}
-//renderList();	
-
+				listEl.innerHTML = htmlResult;
+				renderRating();
+				});
+			}else{
+				load.loadHTML('partials/noresults.html', function(data){	
+				var listEl = document.getElementById('list');
+				listEl.innerHTML = data;
+				});
+			}			
+		});			
+	});
+}
 renderDetailed = function(item){
 	load.loadHTML('partials/detailed.html', function(data){	
-			var htmlData = data;
-			load.loadJSON('data/movies.json', function(data){
-				if(data[item]){
-					var jsonData = data;
-					storage.jsonData = jsonData;			
-					var	htmlResult = load.populateData(htmlData, storage.jsonData[item], "detail");			
-					contentdiv.innerHTML = htmlResult;
-					renderRating();
-					galleryLightBox();
-				}else{
-					renderBadRoute();
-				}			
-			});		
-		});
+		var htmlData = data;
+		load.loadJSON('data/movies.json', function(data){
+			if(data[item]){
+				var jsonData = data;
+				storage.jsonData = jsonData;			
+				var	htmlResult = load.populateData(htmlData, storage.jsonData[item], "detail");			
+				contentdiv.innerHTML = htmlResult;
+				renderRating();
+				galleryLightBox();
+			}else{
+				renderBadRoute();
+			}			
+		});		
+	});
 }
-
 searchMovies = function(phrase){
 	var results = [];
 	for (var i = 0; i < storage.jsonData.length; i++) {
@@ -200,13 +176,11 @@ var router = function(){
 		}else{
 			genreFilter = route;
 			renderList();
-		}
-		
+		}		
 	}else{
 		renderBadRoute();
 	};
 };
-
 router();
 });
 

@@ -77,13 +77,11 @@ revealGallery = function(index){
 };
 galleryLightBox =function(index){
 	var canvas = document.getElementById("canvas");
-
 	var galleryItem = document.getElementsByClassName("galleryItem")[index];
 	var e = document.getElementById("canvasinner");
 	var galleryHtml = "<img src='" + galleryItem.src +"'>";
-	console.log(galleryItem);
 	e.innerHTML = galleryHtml;
-}
+};
 searchPhrase = '';
 genreFilter = '';
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -116,7 +114,6 @@ renderList = function(){
 						htmlResult += load.populateData(htmlData, storage.jsonData[i], "list");
 					};	
 				var listEl = document.getElementById('list');
-				
 				listEl.innerHTML = htmlResult;
 				renderRating();
 				});
@@ -139,7 +136,6 @@ renderDetailed = function(item){
 				var	htmlResult = load.populateData(htmlData, storage.jsonData[item], "detail");			
 				contentdiv.innerHTML = htmlResult;
 				renderRating();
-				galleryLightBox();
 			}else{
 				renderBadRoute();
 			}			
@@ -167,7 +163,6 @@ searchMoviesByGenre = function(genre){
 };
 var router = function(){
 	var route = window.location.href.replace(window.location.origin+"/#/",'');
-	console.log(route);
 	if(isNaN(route) == false){
 		renderDetailed(route);
 	}else if(isNaN(route) == true) {
@@ -183,4 +178,3 @@ var router = function(){
 };
 router();
 });
-
